@@ -1,0 +1,11 @@
+my_postgres_connection:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: 192.168.59.100
+      port: 31079
+      user: myuser
+      password: mypassword
+      dbname: mydatabase
+

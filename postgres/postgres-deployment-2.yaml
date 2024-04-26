@@ -1,0 +1,34 @@
+# postgres-deployment-2.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-2
+  template:
+    metadata:
+      labels:
+        app: postgres-2
+    spec:
+      containers:
+        - name: postgres-2
+          image: postgres:latest
+          env:
+            - name: POSTGRES_DB
+              value: mydatabase2
+            - name: POSTGRES_USER
+              value: myuser2
+            - name: POSTGRES_PASSWORD
+              value: mypassword2
+          ports:
+            - containerPort: 5433
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-data-2
+      volumes:
+        - name: postgres-data-2
+          persistentVolumeClaim:
+            claimName: postgres-pvc-2
